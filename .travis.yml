@@ -3,5 +3,5 @@ language: c
 compiler: gcc
 script:
   - make
-  - git git ls-files src/
+  - git ls-files src/
   - git diff --exit-code
