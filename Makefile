@@ -39,6 +39,9 @@ install:
 	sudo cp bin/$(CLIENT) /usr/bin/$(CLIENT)
 	sudo cp bin/$(SERVER) /usr/bin/$(SERVER)
 	sudo cp $(SERVICE) /etc/systemd/system/$(SERVICE)
+	sudo systemctl start LiteSH
 	
 unistall:
+	sudo systemctl stop LiteSH
+	sudo systemctl disable LiteSH
 	sudo rm /usr/bin/$(CLIENT) /usr/bin/$(SERVER) /etc/systemd/system/$(SERVICE)
