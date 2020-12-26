@@ -152,7 +152,7 @@ int main() {
             write(STDOUT_FILENO, rmessage, nread);
 
         } else if (!strcmp(choice, "5")) { //5 help
-            void *lib_help = dlopen("/usr/lib/litesh/libhelp.so", RTLD_LAZY);
+            void *lib_help = dlopen("/usr/lib/libhelp.so", RTLD_LAZY);
             if (!lib_help) {
                 fprintf(stderr, "dlopen() error: %s\n", dlerror());
             }
