@@ -17,5 +17,5 @@ build() {
 
 package() {
     cd "$srcdir/CW$pkgname"
-	make DESTDIR="${pkgdir}" install
+    make DESTDIR="${pkgdir}" install
 }
