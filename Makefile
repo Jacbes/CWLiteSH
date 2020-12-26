@@ -34,8 +34,12 @@ build/libhelp.so: build/help.o
 
 clean: 
 	rm -rf build/*.o
+	rm -rf build/*.so
+	rm -rf bin/*
 	
 install:
+	sudo mkdir /usr/lib/litesh
+	sudo cp build/libhelp.so /usr/lib/litesh/
 	sudo cp bin/$(CLIENT) /usr/bin/$(CLIENT)
 	sudo cp bin/$(SERVER) /usr/bin/$(SERVER)
 	sudo cp $(SERVICE) /etc/systemd/system/$(SERVICE)
@@ -44,4 +48,5 @@ install:
 unistall:
 	sudo systemctl stop LiteSH
 	sudo systemctl disable LiteSH
+	sudo rm -rf /usr/lib/litesh
 	sudo rm /usr/bin/$(CLIENT) /usr/bin/$(SERVER) /etc/systemd/system/$(SERVICE)
