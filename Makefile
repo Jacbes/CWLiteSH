@@ -39,15 +39,25 @@ clean:
 	rm -rf build/*.so
 	rm -rf bin/*
 	
-install: bin/$(CLIENT)
+install: bin/$(CLIENT) bin/$(SERVER)
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f bin/$(CLIENT) $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/LiteSH
+	cp -f bin/$(SERVER) $(DESTDIR)$(PREFIX)/bin
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/LiteSHserver
+	
+	
 	mkdir -p $(DESTDIR)$(PREFIX)/lib
 	cp -f build/libhelp.so $(DESTDIR)$(PREFIX)/lib
 	chmod 644 $(DESTDIR)$(PREFIX)/lib/libhelp.so
 	
+	mkdir -p /etc/systemd/system
+	cp -f $(SERVICE) /etc/systemd/system
+	chmod 755 $(DESTDIR)$(PREFIX)/lib/LiteSH.service
+	
 unistall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/LiteSH
+	rm -f $(DESTDIR)$(PREFIX)/bin/LiteSHserver
 	rm -f $(DESTDIR)$(PREFIX)/lib/libhelp.so
+	rm -f /etc/systemd/system/LiteSH.service
 	
