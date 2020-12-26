@@ -4,8 +4,6 @@ CLIENT = LiteSH
 SERVER = LiteSHserver
 SERVICE = LiteSH.service
 
-PREFIX = /usr
-
 all: bin/$(CLIENT) bin/$(SERVER) build/libhelp.so
 
 bin/$(CLIENT): build/client.o build/erproc.o build/commands.o
@@ -40,24 +38,24 @@ clean:
 	rm -rf bin/*
 	
 install: bin/$(CLIENT) bin/$(SERVER)
-	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f bin/$(CLIENT) $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/LiteSH
-	cp -f bin/$(SERVER) $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/LiteSHserver
+	mkdir -p $(DESTDIR)/usr/bin
+	cp -f bin/$(CLIENT) $(DESTDIR)/usr/bin
+	chmod 755 $(DESTDIR)/usr/bin/LiteSH
+	cp -f bin/$(SERVER) $(DESTDIR)/usr/bin
+	chmod 755 $(DESTDIR)/usr/bin/LiteSHserver
 	
 	
-	mkdir -p $(DESTDIR)$(PREFIX)/lib
-	cp -f build/libhelp.so $(DESTDIR)$(PREFIX)/lib
-	chmod 644 $(DESTDIR)$(PREFIX)/lib/libhelp.so
+	mkdir -p $(DESTDIR)/usr/lib
+	cp -f build/libhelp.so $(DESTDIR)/usr/lib
+	chmod 644 $(DESTDIR)/usr/lib/libhelp.so
 	
-	mkdir -p /etc/systemd/system
-	cp -f $(SERVICE) /etc/systemd/system
-	chmod 755 $(DESTDIR)$(PREFIX)/lib/LiteSH.service
+	mkdir -p $(DESTDIR)/etc/systemd/system
+	cp -f $(SERVICE) $(DESTDIR)/etc/systemd/system
+	chmod 755 $(DESTDIR)/etc/systemd/system/LiteSH.service
 	
 unistall:
-	rm -f $(DESTDIR)$(PREFIX)/bin/LiteSH
-	rm -f $(DESTDIR)$(PREFIX)/bin/LiteSHserver
-	rm -f $(DESTDIR)$(PREFIX)/lib/libhelp.so
-	rm -f /etc/systemd/system/LiteSH.service
+	rm -f $(DESTDIR)/usr/bin/LiteSH
+	rm -f $(DESTDIR)/usr/bin/LiteSHserver
+	rm -f $(DESTDIR)/usr/lib/libhelp.so
+	rm -f $(DESTDIR)/etc/systemd/system/LiteSH.service
 	
