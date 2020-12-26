@@ -39,12 +39,12 @@ clean:
 	rm -rf build/*.so
 	rm -rf bin/*
 	
-install:
+install: bin/$(CLIENT)
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f LiteSH $(DESTDIR)$(PREFIX)/bin
+	cp -f bin/$(CLIENT) $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/LiteSH
 	mkdir -p $(DESTDIR)$(PREFIX)/lib
-	cp -f libhelp.so $(DESTDIR)$(PREFIX)/lib
+	cp -f build/libhelp.so $(DESTDIR)$(PREFIX)/lib
 	chmod 644 $(DESTDIR)$(PREFIX)/lib/libhelp.so
 	
 unistall:
