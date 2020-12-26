@@ -4,6 +4,8 @@ CLIENT = LiteSH
 SERVER = LiteSHserver
 SERVICE = LiteSH.service
 
+PREFIX = /usr
+
 all: bin/$(CLIENT) bin/$(SERVER) build/libhelp.so
 
 bin/$(CLIENT): build/client.o build/erproc.o build/commands.o
@@ -38,15 +40,14 @@ clean:
 	rm -rf bin/*
 	
 install:
-	sudo mkdir /usr/lib/litesh
-	sudo cp build/libhelp.so /usr/lib/litesh/
-	sudo cp bin/$(CLIENT) /usr/bin/$(CLIENT)
-	sudo cp bin/$(SERVER) /usr/bin/$(SERVER)
-	sudo cp $(SERVICE) /etc/systemd/system/$(SERVICE)
-	sudo systemctl start LiteSH
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp -f LiteSH $(DESTDIR)$(PREFIX)/bin
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/LiteSH
+	mkdir -p $(DESTDIR)$(PREFIX)/lib
+	cp -f libhelp.so $(DESTDIR)$(PREFIX)/lib
+	chmod 644 $(DESTDIR)$(PREFIX)/lib/libhelp.so
 	
 unistall:
-	sudo systemctl stop LiteSH
-	sudo systemctl disable LiteSH
-	sudo rm -rf /usr/lib/litesh
-	sudo rm /usr/bin/$(CLIENT) /usr/bin/$(SERVER) /etc/systemd/system/$(SERVICE)
+	rm -f $(DESTDIR)$(PREFIX)/bin/LiteSH
+	rm -f $(DESTDIR)$(PREFIX)/lib/libhelp.so
+	
